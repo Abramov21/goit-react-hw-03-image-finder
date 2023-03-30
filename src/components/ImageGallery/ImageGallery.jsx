@@ -28,15 +28,20 @@ export class ImageGallery extends Component {
 
       fetchImages(query, page)
         .then(data => {
-          console.log(data);
-          // || data.totalHits
+          this.setState({ isRenderBtn: true });
+
+          // console.log(data);
+          let total = data.totalHits;
+          let length = data.hits.length;
+          // console.log(length);
+          if (length < 12) {
+            this.setState({ isRenderBtn: false });
+          }
+
           if (!data.hits.length) {
             this.setState({ images: [], isLoading: false });
-            if (data.totalHits <= data.hits.length) {
+            if (total <= length) {
               return alert(`No results matching "${query}"`);
-            } else {
-              console.log(isRenderBtn);
-              this.setState({ isRenderBtn: false });
             }
           }
 
