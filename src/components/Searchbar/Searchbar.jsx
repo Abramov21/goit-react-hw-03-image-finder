@@ -1,7 +1,11 @@
 import { Component } from 'react';
-
+import s from './Searchbar.module.css';
+import { PropTypes } from 'prop-types';
 // сюда должен прийти пропс сабмыт
 export class Searchbar extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
   state = {
     query: '',
   };
@@ -9,26 +13,27 @@ export class Searchbar extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    // if (!query.trim()) {
-    //   toast.error('Please, enter your request');
-    //   return;
-    // }
-
+    if (!this.state.query.trim()) {
+      alert('Please, enter your request');
+      return;
+    }
+    // console.log(this.state.query);
     this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
-    console.log(this.props);
   };
 
   render() {
+    // console.log(this.state.query);
+
     return (
-      <header class="searchbar">
-        <form class="form" onSubmit={this.handleSubmit}>
-          <button type="submit" class="button">
-            <span class="button-label">Search</span>
+      <header className={s.Searchbar}>
+        <form className={s.SearchForm} onSubmit={this.handleSubmit}>
+          <button type="submit" className={s.SearchFormBtn}>
+            <span>Search</span>
           </button>
 
           <input
-            class="input"
+            className={s.SearchFormInput}
             type="text"
             value={this.state.query}
             autocomplete="off"
