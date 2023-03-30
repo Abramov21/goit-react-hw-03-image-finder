@@ -21,7 +21,7 @@ export class ImageGallery extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { query, page } = this.props;
-    const { images, isRenderBtn } = this.state;
+    const { images } = this.state;
 
     if (prevProps.query !== query || prevProps.page !== page) {
       this.setState({ isLoading: true });
