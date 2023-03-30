@@ -17,7 +17,15 @@ export class Modal extends Component {
   }
 
   handleKeyDown = e => {
+    // console.log(e);
+    // console.log(1111111111);
     if (e.code === 'Escape') {
+      this.props.onCloseModal();
+    }
+  };
+
+  handleCloseModal = e => {
+    if (e.target === e.currentTarget) {
       this.props.onCloseModal();
     }
   };

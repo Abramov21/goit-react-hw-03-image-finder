@@ -15,10 +15,8 @@ export class ImageGalleryItem extends Component {
     isModalOpen: false,
   };
 
-  handleToggleModal = e => {
-    if (e.target === e.currentTarget) {
-      this.setState(prevState => ({ isModalOpen: !prevState.isModalOpen }));
-    }
+  handleToggleModal = () => {
+    this.setState(prevState => ({ isModalOpen: !prevState.isModalOpen }));
   };
 
   render() {
