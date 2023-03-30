@@ -16,22 +16,28 @@ export class ImageGallery extends Component {
   state = {
     images: [],
     isLoading: false,
+    isRenderBtn: true,
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { query, page } = this.props;
-    const { images } = this.state;
+    const { images, isRenderBtn } = this.state;
 
     if (prevProps.query !== query || prevProps.page !== page) {
       this.setState({ isLoading: true });
 
       fetchImages(query, page)
         .then(data => {
-          // console.log(data);
+          console.log(data);
+          // || data.totalHits
           if (!data.hits.length) {
             this.setState({ images: [], isLoading: false });
-            alert(`No results matching "${query}"`);
-            return;
+            if (data.totalHits <= data.hits.length) {
+              return alert(`No results matching "${query}"`);
+            } else {
+              console.log(isRenderBtn);
+              this.setState({ isRenderBtn: false });
+            }
           }
 
           this.setState({
@@ -44,7 +50,7 @@ export class ImageGallery extends Component {
   }
 
   render() {
-    const { images, isLoading } = this.state;
+    const { images, isLoading, isRenderBtn } = this.state;
     const { onLoadMore } = this.props;
 
     return (
@@ -60,7 +66,7 @@ export class ImageGallery extends Component {
           ))}
         </ul>
         {isLoading && <Loader />}
-        {images.length > 0 && (
+        {images.length > 0 && isRenderBtn && (
           <Button children={'Load more'} onClick={onLoadMore} />
         )}
       </>
