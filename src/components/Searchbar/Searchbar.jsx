@@ -36,8 +36,8 @@ export class Searchbar extends Component {
             className={s.SearchFormInput}
             type="text"
             value={this.state.query}
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
             onChange={e => this.setState({ query: e.target.value })}
           />

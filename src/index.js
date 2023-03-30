@@ -7,7 +7,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <>
       <App />
-      {/* <div id="#modal-root" /> */}
     </>
   </React.StrictMode>
 );

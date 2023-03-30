@@ -33,15 +33,13 @@ axios.defaults.baseURL = 'https://pixabay.com/api/';
 //   }
 // };
 
-const PER_PAGE = 12;
-
-const galleryApi = axios.create({
+const ImageApi = axios.create({
   baseURL: `https://pixabay.com/api/`,
   params: {
-    key: '29319280-fde4903173ec234f4d94cddfd',
+    key: API_KEY,
     image_type: 'photo',
     orientation: 'horizontal',
-    per_page: PER_PAGE,
+    per_page: 12,
   },
 });
 
@@ -51,7 +49,7 @@ export const fetchImages = async (searchQuery, page) => {
     page,
   };
   try {
-    const response = await galleryApi.get('/', { params });
+    const response = await ImageApi.get('/', { params });
     return response.data;
   } catch (error) {
     console.error('Error:', error.message);
